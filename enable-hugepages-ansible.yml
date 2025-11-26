@@ -1,0 +1,34 @@
+---
+# Ansible playbook to enable 1GB hugepages on all HiveOS rigs
+# Usage: ansible-playbook enable-hugepages-ansible.yml -i inventory.ini
+
+- name: Enable 1GB Hugepages on HiveOS Rigs
+  hosts: hiveos_rigs
+  gather_facts: no
+  tasks:
+    - name: Enable hugepages via sysctl
+      shell: |
+        sysctl -w vm.nr_hugepages=$(nproc)
+        for i in $(find /sys/devices/system/node/node* -maxdepth 0 -type d 2>/dev/null);
+        do
+            echo 3 > "$i/hugepages/hugepages-1048576kB/nr_hugepages" 2>/dev/null;
+        done
+      register: hugepages_result
+      become: yes
+
+    - name: Verify hugepages enabled
+      shell: sysctl vm.nr_hugepages
+      register: hugepages_check
+      become: yes
+
+    - name: Show hugepages status
+      debug:
+        msg: "{{ hugepages_check.stdout }}"
+
+    - name: Restart XMRig to use new hugepages
+      shell: |
+        pkill -f xmrig
+        sleep 2
+        cd /hive/miners/custom/xmrig-no-fee && ./start.sh &
+      become: yes
+      ignore_errors: yes
