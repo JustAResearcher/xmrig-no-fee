@@ -1,0 +1,179 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                   XMRig No-Fee - GitHub Release Package                         ║
+║                            STATUS: ✅ READY TO DEPLOY                           ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+📍 LOCATION
+───────────────────────────────────────────────────────────────────────────────
+C:\Users\benef\Downloads\xmrig-6.23.0\xmrig-6.23.0\github-release\
+
+
+📦 PACKAGE CONTENTS
+───────────────────────────────────────────────────────────────────────────────
+✅ xmrig-no-fee.tar.gz      3.4 MB  ← UPLOAD THIS TO GITHUB
+✅ SHA256SUMS               88 B   ← UPLOAD THIS TOO (for verification)
+✅ xmrig                    8.1 MB (binary inside archive)
+✅ config.json              2.4 KB (edit with pool/wallet)
+✅ start.sh                 330 B  (startup wrapper)
+
+
+📚 DOCUMENTATION (Read in Order)
+───────────────────────────────────────────────────────────────────────────────
+1️⃣  READY.txt          → This quick-start guide
+2️⃣  INDEX.md           → Complete overview & file descriptions
+3️⃣  README.md          → Features & quick introduction
+4️⃣  COMMANDS.md        → 🔑 ALL COPY-PASTE COMMANDS (most useful!)
+5️⃣  SETUP.md           → Detailed step-by-step GitHub setup
+6️⃣  HIVEOS_TEST.md     → 🔑 CONFIGURATION & TROUBLESHOOTING
+
+
+🚀 THREE FASTEST PATHS TO MINING
+───────────────────────────────────────────────────────────────────────────────
+
+PATH A - GitHub CLI (⚡ FASTEST if installed)
+─────────────────────────────────────────
+1. Create GitHub repo: https://github.com/new (name: xmrig-no-fee)
+2. Run this ONE command:
+   
+   gh release create v1.0-no-fee \
+     --title "XMRig v6.24.0 – No Developer Fee" \
+     --notes "Pre-compiled with donate-level: 0" \
+     xmrig-no-fee.tar.gz SHA256SUMS
+
+3. Copy your URL:
+   https://github.com/<YOUR_USERNAME>/xmrig-no-fee/releases/download/v1.0-no-fee/xmrig-no-fee.tar.gz
+
+4. Use URL in HiveOS Flight Sheet (see PATH FINAL below)
+
+
+PATH B - PowerShell Script (⚡ EASIEST)
+─────────────────────────────────────────
+1. Create GitHub repo: https://github.com/new (name: xmrig-no-fee)
+2. Create Personal Access Token: https://github.com/settings/tokens
+   - Scope: repo (full control)
+   - Copy the token
+3. Run this command:
+   
+   .\upload-to-github.ps1 -UserName "<your-github-username>" \
+     -PersonalAccessToken "<your-token-here>"
+
+4. Script will output your URL
+
+
+PATH C - Manual (See COMMANDS.md Section 4)
+─────────────────────────────────────────────
+Use curl + REST API for maximum control
+
+
+ALL PATHS → FINAL STEP - HiveOS Configuration
+───────────────────────────────────────────────────────────────────────────────
+1. Go to: https://the.hiveos.farm
+2. Flight Sheets → Create Flight Sheet
+3. Fill in:
+   - Name: XMRig No-Fee
+   - Miner: Custom
+   - URL: https://github.com/<YOUR_USERNAME>/xmrig-no-fee/releases/download/v1.0-no-fee/xmrig-no-fee.tar.gz
+4. Save & Apply to your rig
+5. Wait 1-2 minutes for download/extraction
+6. SSH into rig:
+   
+   ssh root@192.168.68.32
+   cd /hive/miners/custom/xmrig-no-fee
+   nano config.json
+   
+   Edit POOL_URL and YOUR_WALLET_ADDRESS, save (Ctrl+O, Ctrl+X)
+   
+   chmod +x xmrig start.sh
+   ./xmrig --config=config.json
+   
+   (Should show banner and start mining. Ctrl+C to stop.)
+7. Check HiveOS Dashboard - hash rate should appear in 1-2 minutes
+
+
+⚡ TOTAL TIME TO MINING: ~20 Minutes
+───────────────────────────────────────────────────────────────────────────────
+Upload: 5 min | HiveOS setup: 3 min | Config & test: 10 min | Verify: 2 min
+
+
+🎯 KEY INFORMATION
+───────────────────────────────────────────────────────────────────────────────
+Archive:         xmrig-no-fee.tar.gz (3.4 MB)
+Checksum:        54E3B9BC6C6A5DFB5D28679AAF50215B2F9775F9ADB816B322055E6EA419FD6F
+Binary Version:  XMRig v6.24.0 (Linux x64 static)
+Donations:       Disabled (donate-level: 0)
+Binary Type:     ELF 64-bit LSB executable, not stripped
+Rig IP:          192.168.68.32 (your HiveOS rig)
+
+
+📋 WHAT'S IN THE ARCHIVE
+───────────────────────────────────────────────────────────────────────────────
+xmrig           → The actual mining binary (precompiled, ready to run)
+config.json     → Configuration template (edit: pool URL, wallet address)
+start.sh        → Wrapper script (ensures binary is executable)
+
+
+✅ PRE-FLIGHT CHECKLIST
+───────────────────────────────────────────────────────────────────────────────
+✓ Archive created (xmrig-no-fee.tar.gz)
+✓ SHA256SUMS generated
+✓ Binary is Linux x64 static
+✓ config.json has donation disabled
+✓ Documentation complete (6 files)
+✓ PowerShell upload script ready
+✓ GitHub CLI alternative available
+
+
+💡 MOST IMPORTANT FILES TO READ
+───────────────────────────────────────────────────────────────────────────────
+1️⃣  COMMANDS.md
+    → Has EVERY command you might need (copy-paste ready)
+    → PowerShell, bash, everything
+    → Best reference when you get stuck
+
+2️⃣  HIVEOS_TEST.md
+    → Complete setup guide for HiveOS
+    → Troubleshooting section
+    → Performance optimization tips
+    → Most useful for rig configuration
+
+
+🔗 YOUR GITHUB RELEASE URL (After Upload)
+───────────────────────────────────────────────────────────────────────────────
+https://github.com/<YOUR_USERNAME>/xmrig-no-fee/releases/download/v1.0-no-fee/xmrig-no-fee.tar.gz
+
+(Replace <YOUR_USERNAME> with your actual GitHub username)
+
+
+🆘 IF SOMETHING GOES WRONG
+───────────────────────────────────────────────────────────────────────────────
+1. Miner won't download?
+   → Check repo is PUBLIC
+   → Check release URL is accessible
+   → See COMMANDS.md Section 9
+
+2. Miner won't start on rig?
+   → SSH in, check permissions: chmod +x xmrig start.sh
+   → Fix line endings: dos2unix start.sh
+   → See HIVEOS_TEST.md Part 4 (Troubleshooting)
+
+3. Pool connection fails?
+   → Edit config.json: pool URL must be "hostname:port" (no http://)
+   → Verify wallet address is correct
+   → See HIVEOS_TEST.md Part 4
+
+4. Need help?
+   → Read COMMANDS.md (comprehensive command reference)
+   → Read HIVEOS_TEST.md (setup, config, troubleshooting)
+   → Check XMRig docs: https://github.com/xmrig/xmrig
+
+
+📚 NEXT STEP
+───────────────────────────────────────────────────────────────────────────────
+👉 Choose your upload method from the "THREE FASTEST PATHS" section above
+👉 Or read INDEX.md for a complete overview
+👉 Or read COMMANDS.md for detailed step-by-step instructions
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                        YOU'RE ALL SET! LET'S MINE! ⛏️
+═══════════════════════════════════════════════════════════════════════════════
