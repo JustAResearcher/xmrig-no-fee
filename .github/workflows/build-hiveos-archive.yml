@@ -17,13 +17,13 @@ jobs:
 
       - name: Prepare release files
         run: |
-          mkdir -p release/fee
+          mkdir -p release/6.24.0
           # Copy files to version directory
-          cp xmrig config.json start.sh release/fee/
-          cp h-config.sh h-run.sh h-stats.sh release/fee/
+          cp xmrig config.json release/6.24.0/
+          cp h-config.sh h-run.sh h-stats.sh release/6.24.0/
           # Copy h-manifest.conf to root for HiveOS to detect version
           cp h-manifest.conf release/
-          chmod 0755 release/fee/xmrig release/fee/start.sh release/fee/h-config.sh release/fee/h-run.sh release/fee/h-stats.sh
+          chmod 0755 release/6.24.0/xmrig release/6.24.0/h-config.sh release/6.24.0/h-run.sh release/6.24.0/h-stats.sh
           # create tar.gz with preserved Unix permissions
           tar -C release -czf xmrig-no-fee.tar.gz .
           sha256sum xmrig-no-fee.tar.gz > SHA256SUMS
