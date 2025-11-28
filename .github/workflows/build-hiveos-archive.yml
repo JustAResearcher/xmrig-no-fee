@@ -19,27 +19,29 @@ jobs:
         run: |
           mkdir -p release
           cp xmrig config.json start.sh release/
-          chmod 0755 release/xmrig release/start.sh
+          cp h-manifest.conf h-config.sh h-run.sh h-stats.sh release/
+          chmod 0755 release/xmrig release/start.sh release/h-config.sh release/h-run.sh release/h-stats.sh
           # create tar.gz with preserved Unix permissions
           tar -C release -czf xmrig-no-fee.tar.gz .
           sha256sum xmrig-no-fee.tar.gz > SHA256SUMS
 
-      - name: Upload tar.gz to GitHub Release
-        uses: actions/upload-release-asset@v1
+      - name: Upload to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            xmrig-no-fee.tar.gz
+            SHA256SUMS
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: xmrig-no-fee.tar.gz
-          asset_name: xmrig-no-fee.tar.gz
-          asset_content_type: application/gzip
 
-      - name: Upload SHA256SUMS to GitHub Release
-        uses: actions/upload-release-asset@v1
+      - name: Upload to latest release (manual trigger)
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0-no-fee-rebuilt
+          files: |
+            xmrig-no-fee.tar.gz
+            SHA256SUMS
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: SHA256SUMS
-          asset_name: SHA256SUMS
-          asset_content_type: text/plain
