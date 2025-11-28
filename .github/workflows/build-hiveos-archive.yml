@@ -17,12 +17,12 @@ jobs:
 
       - name: Prepare release files
         run: |
-          mkdir -p release
-          # Put ALL files at root level - HiveOS Custom Miner expects flat structure
-          cp xmrig config.json h-manifest.conf h-config.sh h-run.sh h-stats.sh release/
-          chmod 0755 release/xmrig release/h-config.sh release/h-run.sh release/h-stats.sh
-          # create tar.gz with preserved Unix permissions
-          tar -C release -czf xmrig-no-fee.tar.gz .
+          mkdir -p release/xmrig-no
+          # Put files in xmrig-no directory so archive contains: xmrig-no/xmrig, xmrig-no/h-config.sh, etc
+          cp xmrig config.json h-manifest.conf h-config.sh h-run.sh h-stats.sh release/xmrig-no/
+          chmod 0755 release/xmrig-no/xmrig release/xmrig-no/h-config.sh release/xmrig-no/h-run.sh release/xmrig-no/h-stats.sh
+          # create tar.gz with xmrig-no directory at root
+          tar -C release -czf xmrig-no-fee.tar.gz xmrig-no
           sha256sum xmrig-no-fee.tar.gz > SHA256SUMS
 
       - name: Upload to GitHub Release
