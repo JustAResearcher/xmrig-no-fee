@@ -1,4 +1,4 @@
-#!/bin/sh
+﻿#!/bin/sh
 # XMRig Custom Miner Startup Script
 # This script ensures the binary has execute permissions and starts XMRig with the config.
 

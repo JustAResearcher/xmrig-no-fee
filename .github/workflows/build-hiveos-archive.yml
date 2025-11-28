@@ -1,0 +1,39 @@
+name: Build HiveOS-compatible release archive
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch: {}
+
+jobs:
+  build-and-upload:
+    name: Build and upload tar.gz
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare release files
+        run: |
+          mkdir -p release
+          cp github-release/xmrig github-release/config.json github-release/start.sh release/
+          chmod 0755 release/xmrig release/start.sh
+          # create tar.gz with preserved Unix permissions
+          tar -C release -czf xmrig-no-fee.tar.gz .
+          sha256sum xmrig-no-fee.tar.gz > SHA256SUMS
+
+      - name: Upload tar.gz to GitHub Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: xmrig-no-fee.tar.gz
+          asset_name: xmrig-no-fee.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Upload SHA256SUMS to GitHub Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: SHA256SUMS
+          asset_name: SHA256SUMS
+          asset_content_type: text/plain
